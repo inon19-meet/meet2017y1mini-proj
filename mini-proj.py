@@ -18,7 +18,7 @@ turtle.setup(SIZE_X, SIZE_Y)
 turtle.penup()
 
 SQUARE_SIZE = 20
-START_LENGTH = 2
+START_LENGTH = 7
 
 
 #INITIALIZE LISTS
@@ -110,7 +110,7 @@ def make_food():
     #Make the food turtle go to the randomly-generated position
     random_pos = (food_x, food_y)
     # 1. Make the food turtle go to the random position
-    food.goto = (food_x, food_y)
+    food.goto(food_x, food_y)
     # 2. Add the position to pos_list
     food_pos.append(random_pos)
     # 3. Stamp the food, and add the stamp ID to food_stamps
@@ -151,12 +151,10 @@ def move_snake():
     snake.clearstamp(old_stamp)
     pos_list.pop(0)
 
-    #Now go add code to the end of your move_snake() function
-    #Add new lines to the end of the function
-    #Grab position of snake
     new_pos = snake.pos()
     new_x_pos = new_pos[0]
-    new_y_pos = new_pos[1]
+    new_y_pos = new_pos[1] 
+    
     # The next three lines check if the snake is hitting the
     # right edge.
     if new_x_pos >= RIGHT_EDGE:
@@ -173,31 +171,26 @@ def move_snake():
     if new_y_pos >= UP_EDGE:
         print("You hit the top edge! Game over!")
         quit()
-        # You should write code to check for the left, top, and bottom edges.
-        #####WRITE YOUR CODE HERE
+        # You should write code to check for the left, top, and bottom edg
         global food_stamps, food_pos
     #If snake is on top of food item
     if snake.pos() in food_pos:
-        food_ind=food_pos.index(snake.pos()) #What does this do?
-        food.clearstamp(food_stamps[food_ind]) #Remove eaten food
-         #stamp
+        food_ind=food_pos.index(snake.pos()) 
+        print(len(food_stamps))
+        print(food_ind)
+        food.clearstamp(food_stamps[food_ind]) #Remove eaten food stamp
         food_pos.pop(food_ind) #Remove eaten food position
         food_stamps.pop(food_ind) #Remove eaten food stamp
         print("You have eaten the food!")
-        
+        make_food()
+     if snake.pos[0] in snake.pos[0:-1]:
+        print("You have eaten your self")
     turtle.ontimer(move_snake,TIME_STEP)
 move_snake()
 make_food()
-#locations of food
-food_pos = [(100,100), (-100,100), (-100,-100), (100,-100)]
-food_stamps = []
 
-for this_food_pos in food_pos:
-    food.goto(this_food_pos[0],this_food_pos[1])
-    #save the stamp id
-    food_stamps.append(food.stamps())
 
-    
+
 
 
 
