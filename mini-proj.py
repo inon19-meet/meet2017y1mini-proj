@@ -18,7 +18,8 @@ turtle.setup(SIZE_X, SIZE_Y)
 turtle.penup()
 
 SQUARE_SIZE = 20
-START_LENGTH = 1
+START_LENGTH = 2
+
 
 #INITIALIZE LISTS
 pos_list = []
@@ -47,7 +48,6 @@ for i in range(START_LENGTH):
     pos_list.append(my_pos)
     #save the stamp id
     stamp_list.append(snake.stamp())
-    stamp_list.append(my_pos)
     #move around!!!!!!!!!!!!!!!!
 
 UP_ARROW = "Up"
@@ -60,6 +60,12 @@ up = 0
 left = 1
 down = 2
 right = 3
+
+turtle.register_shape("trash.gif")
+food = turtle.clone()
+food.shape("trash.gif")
+
+
 
 direction = up
 
@@ -83,12 +89,34 @@ def right():
     global direction 
     direction=right 
     print("You pressed the right key!")
-    
+
+
 turtle.onkeypress(down,DOWN_ARROW)
 turtle.onkeypress(left,LEFT_ARROW)
 turtle.onkeypress(right,RIGHT_ARROW)
 turtle.onkeypress(up, UP_ARROW) 
 turtle.listen()
+def make_food():
+    #The screen positions go from -SIZE/2 to +SIZE/2
+    #But we need to make food pieces only appear on game squares
+    #So we cut up the game board into multiples of SQUARE_SIZE.
+    min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
+    max_x=int(SIZE_X/2/SQUARE_SIZE)-1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    #Pick a position that is a random multiple of SQUARE_SIZE
+    food_x = random.randint(min_x,max_x)*SQUARE_SIZE
+    food_y = random.randint(min_y,max_y)*SQUARE_SIZE
+    #Make the food turtle go to the randomly-generated position
+    random_pos = (food_x, food_y)
+    # 1. Make the food turtle go to the random position
+    food.goto = (food_x, food_y)
+    # 2. Add the position to pos_list
+    food_pos.append(random_pos)
+    # 3. Stamp the food, and add the stamp ID to food_stamps
+    stamp_id=food.stamp()
+    food_stamps.append(stamp_id)
+
 
 def move_snake():
     my_pos = snake.pos()
@@ -159,37 +187,19 @@ def move_snake():
         
     turtle.ontimer(move_snake,TIME_STEP)
 move_snake()
-turtle.register_shape("trash.gif")
-food = turtle.clone()
-food.shape("trash.gif")
+make_food()
 #locations of food
-B = [(100,100), (-100,100), (-100,-100), (100,-100)]
+food_pos = [(100,100), (-100,100), (-100,-100), (100,-100)]
 food_stamps = []
 
 for this_food_pos in food_pos:
     food.goto(this_food_pos[0],this_food_pos[1])
-    food.stamp()
-    food_pos=(x_pos,y_pos)
-    food.goto(x_pos,y_pos)
-    pos_list.append(food_pos)
     #save the stamp id
-    stamp_list.append(food.stamp())
-    stamp_list.append(food_pos)
+    food_stamps.append(food.stamps())
 
-######## SPECIAL PLACE - Remember it for Part 5
     
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-GH
+######## SPECIAL PLACE - Remember it for Part 5
