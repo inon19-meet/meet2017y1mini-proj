@@ -18,7 +18,7 @@ turtle.setup(SIZE_X, SIZE_Y)
 turtle.penup()
 
 SQUARE_SIZE = 20
-START_LENGTH = 7
+START_LENGTH = 1
 
 #INITIALIZE LISTS
 pos_list = []
@@ -163,7 +163,7 @@ turtle.register_shape("trash.gif")
 food = turtle.clone()
 food.shape("trash.gif")
 #locations of food
-food_pos = [(100,100), (-100,100), (-100,-100), (100,-100)]
+B = [(100,100), (-100,100), (-100,-100), (100,-100)]
 food_stamps = []
 
 for this_food_pos in food_pos:
@@ -178,10 +178,6 @@ for this_food_pos in food_pos:
 
 ######## SPECIAL PLACE - Remember it for Part 5
     
-        
-
-    
-    
 
 
 
@@ -196,10 +192,4 @@ for this_food_pos in food_pos:
 
 
 
-
-
-
-
-
-
-
+GH
