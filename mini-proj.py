@@ -28,8 +28,9 @@ food_pos = []
 food_stamps = []
 
 #set up positions
+turtle.register_shape("kitty.gif")
 snake = turtle.clone()
-snake.shape("square")
+snake.shape("kitty.gif")
 
 #hide the turtle object
 turtle.hideturtle()
@@ -61,9 +62,9 @@ LEFT = 1
 DOWN = 2
 RIGHT = 3
 
-turtle.register_shape("trash.gif")
+turtle.register_shape("devile.gif")
 food = turtle.clone()
-food.shape("trash.gif")
+food.shape("devile.gif")
 
 
 
@@ -103,8 +104,8 @@ def make_food():
     #So we cut up the game board into multiples of SQUARE_SIZE.
     min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
     max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
-    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)+1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)-1
     #Pick a position that is a random multiple of SQUARE_SIZE
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
